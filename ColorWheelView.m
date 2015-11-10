@@ -20,10 +20,18 @@
 
 @implementation ColorWheelView
 
--(instancetype)init {
+//-(instancetype)init {
+//  self = [super init];
+//  if (self) {
+//    [self registerPiePieces];
+//  }
+//  return self;
+//}
+
+-(instancetype)initWithColors:(NSArray *)colors {
   self = [super init];
   if (self) {
-    [self registerPiePieces];
+    self.colors = colors;
   }
   return self;
 }
@@ -53,49 +61,33 @@
   [path stroke];
 }
 
--(void)registerPiePieces {
-  self.piePieces = [NSMutableArray arrayWithCapacity:self.colors.count];
-  CGFloat pieAngle = 2*M_PI / (CGFloat)self.colors.count;
-  
-  CGFloat centerValue = 0;
-  
-  for (int i = 0; i < self.colors.count; i++) {
-    PiePiece *pie = [[PiePiece alloc] init];
-    pie.centerValue = centerValue;
-    pie.minValue = centerValue - pieAngle/2;
-    pie.maxValue = centerValue + pieAngle/2;
-    pie.index = i;
-    
-    if (self.colors.count % 2 == 0 && pie.maxValue - pieAngle < -M_PI) {
-      centerValue = M_PI;
-      pie.centerValue = centerValue;
-      pie.minValue = fabs(pie.maxValue);
-    }
-    
-    centerValue -= pieAngle;
-    
-    if (self.colors.count % 2 != 0 && pie.minValue <= -M_PI) {
-      centerValue = -centerValue;
-      centerValue -= pieAngle;
-    }
-    [self.piePieces addObject:pie];
-  }
-}
-
--(CGFloat)distanceFromCenter:(CGPoint)point {
-  CGFloat x = point.x - self.bounds.size.width/2;
-  CGFloat y = point.y - self.bounds.size.height/2;
-  
-  return hypotf(x, y);
-}
-
-#pragma mark - Custom Getters/Setters
-
--(NSArray *)colors {
-  if (!_colors) {
-    _colors = [[Colors shared] colorList];
-  }
-  return _colors;
-}
+//-(void)registerPiePieces {
+//  self.piePieces = [NSMutableArray arrayWithCapacity:self.colors.count];
+//  CGFloat pieAngle = 2*M_PI / (CGFloat)self.colors.count;
+//  
+//  CGFloat centerValue = 0;
+//  
+//  for (int i = 0; i < self.colors.count; i++) {
+//    PiePiece *pie = [[PiePiece alloc] init];
+//    pie.centerValue = centerValue;
+//    pie.minValue = centerValue - pieAngle/2;
+//    pie.maxValue = centerValue + pieAngle/2;
+//    pie.index = i;
+//    
+//    if (self.colors.count % 2 == 0 && pie.maxValue - pieAngle < -M_PI) {
+//      centerValue = M_PI;
+//      pie.centerValue = centerValue;
+//      pie.minValue = fabs(pie.maxValue);
+//    }
+//    
+//    centerValue -= pieAngle;
+//    
+//    if (self.colors.count % 2 != 0 && pie.minValue <= -M_PI) {
+//      centerValue = -centerValue;
+//      centerValue -= pieAngle;
+//    }
+//    [self.piePieces addObject:pie];
+//  }
+//}
 
 @end

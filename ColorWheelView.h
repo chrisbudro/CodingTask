@@ -14,4 +14,6 @@
 @property (strong, nonatomic) NSArray *colors;
 @property (nonatomic) NSMutableArray *piePieces;
 
+-(instancetype)initWithColors:(NSArray *)colors;
+
 @end

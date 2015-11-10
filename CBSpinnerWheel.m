@@ -37,6 +37,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     [self offsetSelectedPiePieceToTopCenter];
     
     [self selectColorAtIndex:self.currentIndex];
+    [self registerPiePieces];
     
     self.backgroundColor = [UIColor clearColor];
   }
@@ -50,6 +51,8 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     [self addGestureRecognizer:self.spinGesture];
     [self offsetSelectedPiePieceToTopCenter];
     
+    [self registerPiePieces];
+    
     [self selectColorAtIndex:self.currentIndex];
   }
   return self;
@@ -58,7 +61,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
 #pragma mark - Helper Methods
 
 -(void)setupContentView {
-  self.contentView = [[ColorWheelView alloc] init];
+  self.contentView = [[ColorWheelView alloc] initWithColors:[[Colors shared] colorList]];
   self.contentView.backgroundColor = [UIColor clearColor];
   [self addSubview:self.contentView];
   
@@ -78,6 +81,35 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
   
   CGAffineTransform topCenterOffset = CGAffineTransformRotate(self.transform, offset);
   self.transform = topCenterOffset;
+}
+
+-(void)registerPiePieces {
+  NSArray *colors = [[Colors shared] colorList];
+  self.piePieces = [NSMutableArray arrayWithCapacity:colors.count];
+  
+  CGFloat centerValue = 0;
+  
+  for (int i = 0; i < colors.count; i++) {
+    PiePiece *pie = [[PiePiece alloc] init];
+    pie.centerValue = centerValue;
+    pie.minValue = centerValue - self.pieAngle/2;
+    pie.maxValue = centerValue + self.pieAngle/2;
+    pie.index = i;
+    
+    if (colors.count % 2 == 0 && pie.maxValue - self.pieAngle < -M_PI) {
+      centerValue = M_PI;
+      pie.centerValue = centerValue;
+      pie.minValue = fabs(pie.maxValue);
+    }
+    
+    centerValue -= self.pieAngle;
+    
+    if (colors.count % 2 != 0 && pie.minValue <= -M_PI) {
+      centerValue = -centerValue;
+      centerValue -= self.pieAngle;
+    }
+    [self.piePieces addObject:pie];
+  }
 }
 
 -(void)handleSpin:(UIPanGestureRecognizer *)spinGesture {
@@ -101,24 +133,23 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     }
     case UIGestureRecognizerStateEnded:
     {
-      CGFloat radians = atan2f(self.contentView.transform.b, self.contentView.transform.a);
+      CGFloat currentAngle = atan2f(self.contentView.transform.b, self.contentView.transform.a);
       CGFloat newValue = 0.0;
       
       NSInteger updatedIndex = 0;
-      for (PiePiece *pie in self.contentView.piePieces) {
+      for (PiePiece *pie in self.piePieces) {
         if (pie.minValue > 0 && pie.maxValue < 0) {
-          if (pie.maxValue > radians || pie.minValue < radians) {
-            // 5 - Find the quadrant (positive or negative)
-            if (radians > 0) {
-              newValue = radians - M_PI;
+          if (pie.maxValue > currentAngle || pie.minValue < currentAngle) {
+            if (currentAngle > 0) {
+              newValue = currentAngle - M_PI;
             } else {
-              newValue = M_PI + radians;
+              newValue = M_PI + currentAngle;
             }
             updatedIndex = pie.index;
             break;
           }
-        } else if (radians > pie.minValue && radians < pie.maxValue) {
-          newValue = radians - pie.centerValue;
+        } else if (currentAngle > pie.minValue && currentAngle < pie.maxValue) {
+          newValue = currentAngle - pie.centerValue;
           updatedIndex = pie.index;
           break;
         }
@@ -154,12 +185,12 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
   self.currentIndex = index;
 }
 
--(CGFloat)distanceFromCenter:(CGPoint)point {
-  CGFloat x = point.x - self.bounds.size.width/2;
-  CGFloat y = point.y - self.bounds.size.height/2;
-
-  return hypotf(x, y);
-}
+//-(CGFloat)distanceFromCenter:(CGPoint)point {
+//  CGFloat x = point.x - self.bounds.size.width/2;
+//  CGFloat y = point.y - self.bounds.size.height/2;
+//
+//  return hypotf(x, y);
+//}
 
 #pragma mark - Getters/Setters
 

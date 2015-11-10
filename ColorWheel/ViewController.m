@@ -26,7 +26,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self setupWatchConnectivitySession];
-  [self sendColorIndexToWatch:[Colors shared].currentIndex];
+  if (self.session.reachable) {
+    [self sendColorIndexToWatch:[Colors shared].currentIndex];
+  }
   [self setupUI];
 }
 
@@ -68,8 +70,10 @@
   });
 }
 
--(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler {
-  
+-(void)sessionReachabilityDidChange:(WCSession *)session {
+  if (session.reachable) {
+    [self sendColorIndexToWatch:[Colors shared].currentIndex];
+  }
 }
 
 @end
