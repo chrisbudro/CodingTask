@@ -10,14 +10,15 @@
 
 @interface Colors : NSObject
 
-@property (readonly, nonatomic) NSInteger lastSavedIndex;
 @property (readonly, nonatomic) NSInteger currentIndex;
 
 +(instancetype)shared;
+
 -(UIColor *)colorAtIndex:(NSInteger)index;
 -(NSArray *)colorList;
 -(void)updateCurrentIndex:(NSInteger)index;
--(UIColor *)nextColor;
--(void)saveCurrentColor;
+-(NSInteger)nextIndex;
+-(void)saveCurrentColorIndex;
+
 
 @end

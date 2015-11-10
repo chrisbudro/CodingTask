@@ -21,7 +21,11 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-  [[Colors shared] saveCurrentColor];
+  [[Colors shared] saveCurrentColorIndex];
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application {
+  [[Colors shared] saveCurrentColorIndex];
 }
 
 @end

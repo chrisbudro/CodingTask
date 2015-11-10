@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "ColorWheelView.h"
 #import "CBSpinnerWheel.h"
 #import <WatchConnectivity/WatchConnectivity.h>
 #import "Constants.h"
+#import "Colors.h"
 
 @interface ViewController () <CBSpinnerWheelDelegate, WCSessionDelegate>
 
@@ -21,34 +21,55 @@
 
 @implementation ViewController
 
+#pragma mark - Life Cycle Methods
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self setupWatchConnectivitySession];
+  [self sendColorIndexToWatch:[Colors shared].currentIndex];
+  [self setupUI];
+}
+
+#pragma mark - Helper Methods
+
+-(void)setupWatchConnectivitySession {
   self.spinnerWheelView.delegate = self;
   self.session = [WCSession defaultSession];
   self.session.delegate = self;
   [self.session activateSession];
-  
+}
+
+-(void)setupUI {
   UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
   UIVisualEffectView *backgroundBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
   backgroundBlurView.frame = self.view.frame;
   [self.view addSubview:backgroundBlurView];
   [self.view sendSubviewToBack:backgroundBlurView];
-  
+}
+
+-(void)sendColorIndexToWatch:(NSInteger)index {
+  NSNumber *updatedIndex = [NSNumber numberWithInteger:index];
+  NSDictionary *message = @{kUpdatedColorIndexKey: updatedIndex};
+  [self.session sendMessage:message replyHandler:nil errorHandler:nil];
 }
 
 #pragma mark - Spinner Wheel Delegate
 
 -(void)spinner:(CBSpinnerWheel *)spinner didSelectColorAtIndex:(NSInteger)index {
-  NSNumber *updatedIndex = [NSNumber numberWithInteger:index];
-  NSDictionary *message = @{kUpdatedColorIndexKey: updatedIndex};
-  [self.session sendMessage:message replyHandler:nil errorHandler:nil];
+  [self sendColorIndexToWatch:index];
 }
 
 #pragma mark - Watch Session Delegate
 
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
   NSNumber *updatedIndex = message[kUpdatedColorIndexKey];
-  [self.spinnerWheelView selectColorAtIndex:updatedIndex.integerValue];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.spinnerWheelView selectColorAtIndex:updatedIndex.integerValue];
+  });
+}
+
+-(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler {
+  
 }
 
 @end

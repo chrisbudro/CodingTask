@@ -9,12 +9,11 @@
 #import "Colors.h"
 #import "UIColor+HexColor.h"
 
-NSString *const kCurrentColorKey = @"CurrentColor";
+NSString *const kSavedColorIndexKey = @"SavedColorIndex";
 
 @interface Colors ()
 
 @property (strong, nonatomic) NSArray *list;
-@property (nonatomic) NSInteger lastSavedIndex;
 @property (nonatomic) NSInteger currentIndex;
 
 @end
@@ -36,13 +35,13 @@ NSString *const kCurrentColorKey = @"CurrentColor";
     NSArray *colorArray = [self retrieveColorArrayFromPropertyList];
     self.list = colorArray;
     
-    [self restoreLastSavedIndex];
+    self.currentIndex = [self retrieveSavedColorIndex];
   }
   return self;
 }
 
 -(UIColor *)colorAtIndex:(NSInteger)index {
-  if (self.list.count > index) {
+  if (index < self.list.count) {
     return self.list[index];
   }
   return nil;
@@ -56,14 +55,12 @@ NSString *const kCurrentColorKey = @"CurrentColor";
   self.currentIndex = index;
 }
 
--(UIColor *)nextColor {
-  NSInteger nextIndex = self.currentIndex + 1;
-  if (nextIndex >= self.list.count) {
-    self.currentIndex = 0;
-  } else {
-    self.currentIndex = nextIndex;
+-(NSInteger)nextIndex {
+  NSInteger updatedIndex = self.currentIndex + 1;
+  if (updatedIndex >= self.list.count) {
+    updatedIndex = 0;
   }
-  return self.list[self.currentIndex];
+  return updatedIndex;
 }
 
 -(NSArray *)retrieveColorArrayFromPropertyList {
@@ -75,37 +72,28 @@ NSString *const kCurrentColorKey = @"CurrentColor";
     UIColor *color = [UIColor colorWithHexColor:hexColor];
     [convertedColorArray addObject:color];
   }
+  
+  if (convertedColorArray.count <= 0) {
+    NSArray *placeholderColorArray = @[[UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor yellowColor]];
+    return [NSMutableArray arrayWithArray:placeholderColorArray];
+  }
   return convertedColorArray;
 }
 
--(void)restoreLastSavedIndex {
-  UIColor *savedColor = [self retrieveSavedColor];
-  if (savedColor) {
-    NSInteger savedColorIndex = [self.list indexOfObject:savedColor];
-    if (savedColorIndex != NSNotFound) {
-      self.lastSavedIndex = savedColorIndex;
-    }
-  }
-}
-
--(void)saveCurrentColor {
-  UIColor *currentColor = self.list[self.currentIndex];
-  NSData *currentColorData = [NSKeyedArchiver archivedDataWithRootObject:currentColor];
+-(void)saveCurrentColorIndex {
+  NSNumber *indexObject = [NSNumber numberWithInteger:self.currentIndex];
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  [userDefaults setObject:currentColorData forKey:kCurrentColorKey];
+  [userDefaults setObject:indexObject forKey:kSavedColorIndexKey];
   [userDefaults synchronize];
 }
 
--(UIColor *)retrieveSavedColor {
-  UIColor *savedColor = nil;
-  
+-(NSInteger)retrieveSavedColorIndex {
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  if ([userDefaults objectForKey:kCurrentColorKey]) {
-    NSData *colorData = [userDefaults objectForKey:kCurrentColorKey];
-    savedColor = [NSKeyedUnarchiver unarchiveObjectWithData:colorData];
+  if ([userDefaults objectForKey:kSavedColorIndexKey]) {
+    NSNumber *savedColorIndex = [userDefaults objectForKey:kSavedColorIndexKey];
+    return savedColorIndex.integerValue;
   }
-  return savedColor;
+  return 0;
 }
-
 
 @end
