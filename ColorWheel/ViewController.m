@@ -8,13 +8,14 @@
 
 #import "ViewController.h"
 #import "ColorWheelView.h"
+#import "CBSpinnerWheel.h"
+#import <WatchConnectivity/WatchConnectivity.h>
+#import "Constants.h"
 
-@interface ViewController ()
-@property (weak, nonatomic) IBOutlet ColorWheelView *colorWheelView;
-@property (strong, nonatomic) UIPanGestureRecognizer *wheelPanGesture;
+@interface ViewController () <CBSpinnerWheelDelegate, WCSessionDelegate>
 
-@property (nonatomic) CGFloat startAngle;
-@property (nonatomic) CGAffineTransform startTransform;
+@property (weak, nonatomic) IBOutlet CBSpinnerWheel *spinnerWheelView;
+@property (strong, nonatomic) WCSession *session;
 
 @end
 
@@ -22,47 +23,32 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.spinnerWheelView.delegate = self;
+  self.session = [WCSession defaultSession];
+  self.session.delegate = self;
+  [self.session activateSession];
   
-//  [self.colorWheelView addGestureRecognizer:self.wheelPanGesture];
+  UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+  UIVisualEffectView *backgroundBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+  backgroundBlurView.frame = self.view.frame;
+  [self.view addSubview:backgroundBlurView];
+  [self.view sendSubviewToBack:backgroundBlurView];
+  
 }
 
-#pragma mark - Helper Methods
+#pragma mark - Spinner Wheel Delegate
 
--(void)handleSpin:(UIPanGestureRecognizer *)spinGesture {
-  CGPoint touchPoint = [spinGesture translationInView:self.view];
-  
-  //  NSLog(@"bounds: %f, %f", , self.bounds.size.height/2);
-  
-  CGFloat xFromCenter = touchPoint.x - self.colorWheelView.center.x;
-  CGFloat yFromCenter = touchPoint.y - self.colorWheelView.center.y;
-  
-  if (spinGesture.state == UIGestureRecognizerStateBegan) {
-    self.startAngle = atan2(yFromCenter, xFromCenter);
-    self.startTransform = self.colorWheelView.transform;
-  }
-  
-  if (spinGesture.state == UIGestureRecognizerStateChanged) {
-    CGFloat newAngle = atan2(yFromCenter, xFromCenter);
-    
-    
-    CGFloat angleDifference = self.startAngle - newAngle;
-    
-    NSLog(@"%f, %f, %f", angleDifference, newAngle, self.startAngle);
-    
-    self.colorWheelView.transform = CGAffineTransformRotate(self.startTransform, angleDifference);
-  }
+-(void)spinner:(CBSpinnerWheel *)spinner didSelectColorAtIndex:(NSInteger)index {
+  NSNumber *updatedIndex = [NSNumber numberWithInteger:index];
+  NSDictionary *message = @{kUpdatedColorIndexKey: updatedIndex};
+  [self.session sendMessage:message replyHandler:nil errorHandler:nil];
 }
 
+#pragma mark - Watch Session Delegate
 
-
-#pragma mark - Custom Getters/Setters
-
--(UIPanGestureRecognizer *)wheelPanGesture {
-  if (!_wheelPanGesture) {
-    _wheelPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSpin:)];
-  }
-  return _wheelPanGesture;
+-(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
+  NSNumber *updatedIndex = message[kUpdatedColorIndexKey];
+  [self.spinnerWheelView selectColorAtIndex:updatedIndex.integerValue];
 }
-
 
 @end

@@ -17,6 +17,22 @@
 		4C96B1351BEE6E9E00F92EB8 /* ColorWheelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C96B1341BEE6E9E00F92EB8 /* ColorWheelUITests.m */; };
 		4C96B1441BEE6EC100F92EB8 /* ColorWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */; settings = {ASSET_TAGS = (); }; };
 		4C96B1931BEF393200F92EB8 /* CBSpinnerWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C96B1921BEF393200F92EB8 /* CBSpinnerWheel.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94CC81BF02C38003EE0AE /* PiePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94CC71BF02C38003EE0AE /* PiePiece.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94CD11BF03B8C003EE0AE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94CCF1BF03B8C003EE0AE /* Interface.storyboard */; };
+		4CE94CD31BF03B8C003EE0AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94CD21BF03B8C003EE0AE /* Assets.xcassets */; };
+		4CE94CDA1BF03B8D003EE0AE /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4CE94CD91BF03B8D003EE0AE /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4CE94CE01BF03B8D003EE0AE /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94CDF1BF03B8D003EE0AE /* InterfaceController.m */; };
+		4CE94CE31BF03B8D003EE0AE /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94CE21BF03B8D003EE0AE /* ExtensionDelegate.m */; };
+		4CE94CE51BF03B8D003EE0AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94CE41BF03B8D003EE0AE /* Assets.xcassets */; };
+		4CE94CE91BF03B8D003EE0AE /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4CE94CCD1BF03B8C003EE0AE /* Watch.app */; };
+		4CE94D7C1BF13F04003EE0AE /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D7B1BF13F04003EE0AE /* Colors.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D7D1BF13F04003EE0AE /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D7B1BF13F04003EE0AE /* Colors.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D7F1BF142F2003EE0AE /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94D7E1BF142F2003EE0AE /* Colors.plist */; settings = {ASSET_TAGS = (); }; };
+		4CE94D801BF142F2003EE0AE /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94D7E1BF142F2003EE0AE /* Colors.plist */; settings = {ASSET_TAGS = (); }; };
+		4CE94D831BF145CE003EE0AE /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D821BF145CE003EE0AE /* UIColor+HexColor.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D871BF16224003EE0AE /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D861BF16224003EE0AE /* Constants.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D881BF16224003EE0AE /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D861BF16224003EE0AE /* Constants.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D891BF1635F003EE0AE /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D821BF145CE003EE0AE /* UIColor+HexColor.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +50,46 @@
 			remoteGlobalIDString = 4C96B10B1BEE6E9E00F92EB8;
 			remoteInfo = ColorWheel;
 		};
+		4CE94CDB1BF03B8D003EE0AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C96B1041BEE6E9E00F92EB8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CE94CD81BF03B8D003EE0AE;
+			remoteInfo = "Watch Extension";
+		};
+		4CE94CE71BF03B8D003EE0AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C96B1041BEE6E9E00F92EB8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CE94CCC1BF03B8C003EE0AE;
+			remoteInfo = Watch;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4CE94CED1BF03B8D003EE0AE /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4CE94CDA1BF03B8D003EE0AE /* Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CE94CF11BF03B8D003EE0AE /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				4CE94CE91BF03B8D003EE0AE /* Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4C96B10C1BEE6E9E00F92EB8 /* ColorWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +112,26 @@
 		4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWheelView.m; sourceTree = "<group>"; };
 		4C96B1911BEF393200F92EB8 /* CBSpinnerWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSpinnerWheel.h; sourceTree = "<group>"; };
 		4C96B1921BEF393200F92EB8 /* CBSpinnerWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSpinnerWheel.m; sourceTree = "<group>"; };
+		4CE94CC61BF02C38003EE0AE /* PiePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PiePiece.h; path = ../PiePiece.h; sourceTree = "<group>"; };
+		4CE94CC71BF02C38003EE0AE /* PiePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PiePiece.m; path = ../PiePiece.m; sourceTree = "<group>"; };
+		4CE94CCD1BF03B8C003EE0AE /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CE94CD01BF03B8C003EE0AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		4CE94CD21BF03B8C003EE0AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4CE94CD41BF03B8D003EE0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CE94CD91BF03B8D003EE0AE /* Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CE94CDE1BF03B8D003EE0AE /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		4CE94CDF1BF03B8D003EE0AE /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		4CE94CE11BF03B8D003EE0AE /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
+		4CE94CE21BF03B8D003EE0AE /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
+		4CE94CE41BF03B8D003EE0AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4CE94CE61BF03B8D003EE0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CE94D7A1BF13F04003EE0AE /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		4CE94D7B1BF13F04003EE0AE /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		4CE94D7E1BF142F2003EE0AE /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
+		4CE94D811BF145CE003EE0AE /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
+		4CE94D821BF145CE003EE0AE /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
+		4CE94D851BF16224003EE0AE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4CE94D861BF16224003EE0AE /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +156,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CE94CD61BF03B8D003EE0AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -90,6 +172,8 @@
 				4C96B10E1BEE6E9E00F92EB8 /* ColorWheel */,
 				4C96B1281BEE6E9E00F92EB8 /* ColorWheelTests */,
 				4C96B1331BEE6E9E00F92EB8 /* ColorWheelUITests */,
+				4CE94CCE1BF03B8C003EE0AE /* Watch */,
+				4CE94CDD1BF03B8D003EE0AE /* Watch Extension */,
 				4C96B10D1BEE6E9E00F92EB8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,6 +184,8 @@
 				4C96B10C1BEE6E9E00F92EB8 /* ColorWheel.app */,
 				4C96B1251BEE6E9E00F92EB8 /* ColorWheelTests.xctest */,
 				4C96B1301BEE6E9E00F92EB8 /* ColorWheelUITests.xctest */,
+				4CE94CCD1BF03B8C003EE0AE /* Watch.app */,
+				4CE94CD91BF03B8D003EE0AE /* Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,11 +193,13 @@
 		4C96B10E1BEE6E9E00F92EB8 /* ColorWheel */ = {
 			isa = PBXGroup;
 			children = (
+				4CE94D851BF16224003EE0AE /* Constants.h */,
+				4CE94D861BF16224003EE0AE /* Constants.m */,
+				4CE94CCA1BF02C49003EE0AE /* Controller */,
+				4CE94CC91BF02C41003EE0AE /* Model */,
 				4C96B1451BEE6ED100F92EB8 /* View */,
 				4C96B1121BEE6E9E00F92EB8 /* AppDelegate.h */,
 				4C96B1131BEE6E9E00F92EB8 /* AppDelegate.m */,
-				4C96B1151BEE6E9E00F92EB8 /* ViewController.h */,
-				4C96B1161BEE6E9E00F92EB8 /* ViewController.m */,
 				4C96B1181BEE6E9E00F92EB8 /* Main.storyboard */,
 				4C96B11B1BEE6E9E00F92EB8 /* Assets.xcassets */,
 				4C96B11D1BEE6E9E00F92EB8 /* LaunchScreen.storyboard */,
@@ -159,6 +247,52 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		4CE94CC91BF02C41003EE0AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4CE94CC61BF02C38003EE0AE /* PiePiece.h */,
+				4CE94CC71BF02C38003EE0AE /* PiePiece.m */,
+				4CE94D7A1BF13F04003EE0AE /* Colors.h */,
+				4CE94D7B1BF13F04003EE0AE /* Colors.m */,
+				4CE94D811BF145CE003EE0AE /* UIColor+HexColor.h */,
+				4CE94D821BF145CE003EE0AE /* UIColor+HexColor.m */,
+				4CE94D7E1BF142F2003EE0AE /* Colors.plist */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4CE94CCA1BF02C49003EE0AE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C96B1151BEE6E9E00F92EB8 /* ViewController.h */,
+				4C96B1161BEE6E9E00F92EB8 /* ViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4CE94CCE1BF03B8C003EE0AE /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				4CE94CCF1BF03B8C003EE0AE /* Interface.storyboard */,
+				4CE94CD21BF03B8C003EE0AE /* Assets.xcassets */,
+				4CE94CD41BF03B8D003EE0AE /* Info.plist */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		4CE94CDD1BF03B8D003EE0AE /* Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4CE94CDE1BF03B8D003EE0AE /* InterfaceController.h */,
+				4CE94CDF1BF03B8D003EE0AE /* InterfaceController.m */,
+				4CE94CE11BF03B8D003EE0AE /* ExtensionDelegate.h */,
+				4CE94CE21BF03B8D003EE0AE /* ExtensionDelegate.m */,
+				4CE94CE41BF03B8D003EE0AE /* Assets.xcassets */,
+				4CE94CE61BF03B8D003EE0AE /* Info.plist */,
+			);
+			path = "Watch Extension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,10 +303,12 @@
 				4C96B1081BEE6E9E00F92EB8 /* Sources */,
 				4C96B1091BEE6E9E00F92EB8 /* Frameworks */,
 				4C96B10A1BEE6E9E00F92EB8 /* Resources */,
+				4CE94CF11BF03B8D003EE0AE /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4CE94CE81BF03B8D003EE0AE /* PBXTargetDependency */,
 			);
 			name = ColorWheel;
 			productName = ColorWheel;
@@ -215,6 +351,40 @@
 			productReference = 4C96B1301BEE6E9E00F92EB8 /* ColorWheelUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		4CE94CCC1BF03B8C003EE0AE /* Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CE94CEE1BF03B8D003EE0AE /* Build configuration list for PBXNativeTarget "Watch" */;
+			buildPhases = (
+				4CE94CCB1BF03B8C003EE0AE /* Resources */,
+				4CE94CED1BF03B8D003EE0AE /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CE94CDC1BF03B8D003EE0AE /* PBXTargetDependency */,
+			);
+			name = Watch;
+			productName = Watch;
+			productReference = 4CE94CCD1BF03B8C003EE0AE /* Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		4CE94CD81BF03B8D003EE0AE /* Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CE94CEA1BF03B8D003EE0AE /* Build configuration list for PBXNativeTarget "Watch Extension" */;
+			buildPhases = (
+				4CE94CD51BF03B8D003EE0AE /* Sources */,
+				4CE94CD61BF03B8D003EE0AE /* Frameworks */,
+				4CE94CD71BF03B8D003EE0AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Watch Extension";
+			productName = "Watch Extension";
+			productReference = 4CE94CD91BF03B8D003EE0AE /* Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -235,6 +405,12 @@
 						CreatedOnToolsVersion = 7.0;
 						TestTargetID = 4C96B10B1BEE6E9E00F92EB8;
 					};
+					4CE94CCC1BF03B8C003EE0AE = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					4CE94CD81BF03B8D003EE0AE = {
+						CreatedOnToolsVersion = 7.0;
+					};
 				};
 			};
 			buildConfigurationList = 4C96B1071BEE6E9E00F92EB8 /* Build configuration list for PBXProject "ColorWheel" */;
@@ -253,6 +429,8 @@
 				4C96B10B1BEE6E9E00F92EB8 /* ColorWheel */,
 				4C96B1241BEE6E9E00F92EB8 /* ColorWheelTests */,
 				4C96B12F1BEE6E9E00F92EB8 /* ColorWheelUITests */,
+				4CE94CCC1BF03B8C003EE0AE /* Watch */,
+				4CE94CD81BF03B8D003EE0AE /* Watch Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -262,6 +440,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CE94D7F1BF142F2003EE0AE /* Colors.plist in Resources */,
 				4C96B11F1BEE6E9E00F92EB8 /* LaunchScreen.storyboard in Resources */,
 				4C96B11C1BEE6E9E00F92EB8 /* Assets.xcassets in Resources */,
 				4C96B11A1BEE6E9E00F92EB8 /* Main.storyboard in Resources */,
@@ -282,6 +461,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CE94CCB1BF03B8C003EE0AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CE94CD31BF03B8C003EE0AE /* Assets.xcassets in Resources */,
+				4CE94CD11BF03B8C003EE0AE /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CE94CD71BF03B8D003EE0AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CE94D801BF142F2003EE0AE /* Colors.plist in Resources */,
+				4CE94CE51BF03B8D003EE0AE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -290,10 +487,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C96B1931BEF393200F92EB8 /* CBSpinnerWheel.m in Sources */,
+				4CE94D831BF145CE003EE0AE /* UIColor+HexColor.m in Sources */,
 				4C96B1171BEE6E9E00F92EB8 /* ViewController.m in Sources */,
+				4CE94D7C1BF13F04003EE0AE /* Colors.m in Sources */,
 				4C96B1141BEE6E9E00F92EB8 /* AppDelegate.m in Sources */,
 				4C96B1441BEE6EC100F92EB8 /* ColorWheelView.m in Sources */,
 				4C96B1111BEE6E9E00F92EB8 /* main.m in Sources */,
+				4CE94CC81BF02C38003EE0AE /* PiePiece.m in Sources */,
+				4CE94D871BF16224003EE0AE /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +514,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4CE94CD51BF03B8D003EE0AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CE94CE31BF03B8D003EE0AE /* ExtensionDelegate.m in Sources */,
+				4CE94D7D1BF13F04003EE0AE /* Colors.m in Sources */,
+				4CE94D891BF1635F003EE0AE /* UIColor+HexColor.m in Sources */,
+				4CE94CE01BF03B8D003EE0AE /* InterfaceController.m in Sources */,
+				4CE94D881BF16224003EE0AE /* Constants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -325,6 +538,16 @@
 			isa = PBXTargetDependency;
 			target = 4C96B10B1BEE6E9E00F92EB8 /* ColorWheel */;
 			targetProxy = 4C96B1311BEE6E9E00F92EB8 /* PBXContainerItemProxy */;
+		};
+		4CE94CDC1BF03B8D003EE0AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CE94CD81BF03B8D003EE0AE /* Watch Extension */;
+			targetProxy = 4CE94CDB1BF03B8D003EE0AE /* PBXContainerItemProxy */;
+		};
+		4CE94CE81BF03B8D003EE0AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CE94CCC1BF03B8C003EE0AE /* Watch */;
+			targetProxy = 4CE94CE71BF03B8D003EE0AE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -343,6 +566,14 @@
 				4C96B11E1BEE6E9E00F92EB8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4CE94CCF1BF03B8C003EE0AE /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CE94CD01BF03B8C003EE0AE /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -502,6 +733,64 @@
 			};
 			name = Release;
 		};
+		4CE94CEB1BF03B8D003EE0AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisbudro.ColorWheel.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		4CE94CEC1BF03B8D003EE0AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisbudro.ColorWheel.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		4CE94CEF1BF03B8D003EE0AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = Watch_Extension;
+				INFOPLIST_FILE = Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisbudro.ColorWheel.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		4CE94CF01BF03B8D003EE0AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = Watch_Extension;
+				INFOPLIST_FILE = Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chrisbudro.ColorWheel.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -537,6 +826,24 @@
 			buildConfigurations = (
 				4C96B1401BEE6E9E00F92EB8 /* Debug */,
 				4C96B1411BEE6E9E00F92EB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CE94CEA1BF03B8D003EE0AE /* Build configuration list for PBXNativeTarget "Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CE94CEB1BF03B8D003EE0AE /* Debug */,
+				4CE94CEC1BF03B8D003EE0AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CE94CEE1BF03B8D003EE0AE /* Build configuration list for PBXNativeTarget "Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CE94CEF1BF03B8D003EE0AE /* Debug */,
+				4CE94CF01BF03B8D003EE0AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

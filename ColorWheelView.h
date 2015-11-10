@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CBSpinnerWheel.h"
 
-@interface ColorWheelView : CBSpinnerWheel
+@interface ColorWheelView : UIView
 
 @property (strong, nonatomic) NSArray *colors;
+@property (nonatomic) NSMutableArray *piePieces;
 
 @end
