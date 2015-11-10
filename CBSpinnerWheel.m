@@ -127,7 +127,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     {
       CGFloat newAngle = atan2(yFromCenter, xFromCenter);
       CGFloat angleDifference = self.startAngle - newAngle;
-      NSLog(@"start: %f, new: %f, diff: %f", self.startAngle, newAngle, angleDifference);
+
       self.contentView.transform = CGAffineTransformRotate(self.startTransform, -angleDifference);
       break;
     }
@@ -137,6 +137,8 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
       CGFloat newValue = 0.0;
       
       NSInteger updatedIndex = 0;
+      PiePiece *selectedPie;
+      
       for (PiePiece *pie in self.piePieces) {
         if (pie.minValue > 0 && pie.maxValue < 0) {
           if (pie.maxValue > currentAngle || pie.minValue < currentAngle) {
@@ -146,15 +148,32 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
               newValue = M_PI + currentAngle;
             }
             updatedIndex = pie.index;
+            selectedPie = pie;
             break;
           }
         } else if (currentAngle > pie.minValue && currentAngle < pie.maxValue) {
           newValue = currentAngle - pie.centerValue;
           updatedIndex = pie.index;
+          selectedPie = pie;
           break;
         }
       }
       
+      CGFloat currentAngleInPositiveDegrees = [self degreesFromRadians:currentAngle] + 360.0;
+      if (currentAngleInPositiveDegrees >= 360) {
+        currentAngleInPositiveDegrees -= 360;
+      }
+      CGFloat pieAngleInDegrees = [self degreesFromRadians:self.pieAngle];
+      NSInteger calculatedIndex = round(currentAngleInPositiveDegrees / pieAngleInDegrees);
+      CGFloat newAngleInDegrees = (CGFloat)updatedIndex * pieAngleInDegrees;
+
+      CGFloat newAngleInRadians = [self radiansFromDegrees:newAngleInDegrees];
+      CGFloat angleDifference = newAngleInRadians - currentAngle;
+      
+      if (updatedIndex >= [[Colors shared] colorList].count) {
+        updatedIndex = 0;
+      }
+
       if (self.currentIndex != updatedIndex) {
         self.currentIndex = updatedIndex;
         [self.delegate spinner:self didSelectColorAtIndex:self.currentIndex];

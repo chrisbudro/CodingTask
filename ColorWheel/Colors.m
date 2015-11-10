@@ -70,12 +70,9 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
   
   for (NSString *hexColor in hexColorArray) {
     UIColor *color = [UIColor colorWithHexColor:hexColor];
-    [convertedColorArray addObject:color];
-  }
-  
-  if (convertedColorArray.count <= 0) {
-    NSArray *placeholderColorArray = @[[UIColor blueColor], [UIColor redColor], [UIColor greenColor], [UIColor yellowColor]];
-    return [NSMutableArray arrayWithArray:placeholderColorArray];
+    if (color) {
+      [convertedColorArray addObject:color];
+    }
   }
   return convertedColorArray;
 }
