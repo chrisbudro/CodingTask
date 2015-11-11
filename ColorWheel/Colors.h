@@ -20,5 +20,4 @@
 -(NSInteger)nextIndex;
 -(void)saveCurrentColorIndex;
 
-
 @end
