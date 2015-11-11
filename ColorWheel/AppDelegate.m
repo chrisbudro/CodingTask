@@ -9,16 +9,7 @@
 #import "AppDelegate.h"
 #import "Colors.h"
 
-@interface AppDelegate ()
-
-@end
-
 @implementation AppDelegate
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  return YES;
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
   [[Colors shared] saveCurrentColorIndex];

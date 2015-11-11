@@ -7,10 +7,11 @@
 //
 
 #import "ColorWheelView.h"
-#import "PiePiece.h"
 #import "Colors.h"
 
 @interface ColorWheelView ()
+
+@property (strong, nonatomic) NSArray *colors;
 
 @property (nonatomic) CGPoint circleCenter;
 @property (nonatomic) CGFloat radius;
@@ -19,14 +20,6 @@
 @end
 
 @implementation ColorWheelView
-
-//-(instancetype)init {
-//  self = [super init];
-//  if (self) {
-//    [self registerPiePieces];
-//  }
-//  return self;
-//}
 
 -(instancetype)initWithColors:(NSArray *)colors {
   self = [super init];
@@ -61,34 +54,5 @@
   path.lineWidth = self.radius;
   [path stroke];
 }
-
-//-(void)registerPiePieces {
-//  self.piePieces = [NSMutableArray arrayWithCapacity:self.colors.count];
-//  CGFloat pieAngle = 2*M_PI / (CGFloat)self.colors.count;
-//  
-//  CGFloat centerValue = 0;
-//  
-//  for (int i = 0; i < self.colors.count; i++) {
-//    PiePiece *pie = [[PiePiece alloc] init];
-//    pie.centerValue = centerValue;
-//    pie.minValue = centerValue - pieAngle/2;
-//    pie.maxValue = centerValue + pieAngle/2;
-//    pie.index = i;
-//    
-//    if (self.colors.count % 2 == 0 && pie.maxValue - pieAngle < -M_PI) {
-//      centerValue = M_PI;
-//      pie.centerValue = centerValue;
-//      pie.minValue = fabs(pie.maxValue);
-//    }
-//    
-//    centerValue -= pieAngle;
-//    
-//    if (self.colors.count % 2 != 0 && pie.minValue <= -M_PI) {
-//      centerValue = -centerValue;
-//      centerValue -= pieAngle;
-//    }
-//    [self.piePieces addObject:pie];
-//  }
-//}
 
 @end

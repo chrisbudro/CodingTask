@@ -17,7 +17,6 @@
 		4C96B1351BEE6E9E00F92EB8 /* ColorWheelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C96B1341BEE6E9E00F92EB8 /* ColorWheelUITests.m */; };
 		4C96B1441BEE6EC100F92EB8 /* ColorWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */; settings = {ASSET_TAGS = (); }; };
 		4C96B1931BEF393200F92EB8 /* CBSpinnerWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C96B1921BEF393200F92EB8 /* CBSpinnerWheel.m */; settings = {ASSET_TAGS = (); }; };
-		4CE94CC81BF02C38003EE0AE /* PiePiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94CC71BF02C38003EE0AE /* PiePiece.m */; settings = {ASSET_TAGS = (); }; };
 		4CE94CD11BF03B8C003EE0AE /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94CCF1BF03B8C003EE0AE /* Interface.storyboard */; };
 		4CE94CD31BF03B8C003EE0AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94CD21BF03B8C003EE0AE /* Assets.xcassets */; };
 		4CE94CDA1BF03B8D003EE0AE /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4CE94CD91BF03B8D003EE0AE /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -108,12 +107,10 @@
 		4C96B1301BEE6E9E00F92EB8 /* ColorWheelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ColorWheelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C96B1341BEE6E9E00F92EB8 /* ColorWheelUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColorWheelUITests.m; sourceTree = "<group>"; };
 		4C96B1361BEE6E9E00F92EB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C96B1421BEE6EC100F92EB8 /* ColorWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorWheelView.h; sourceTree = "<group>"; };
-		4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWheelView.m; sourceTree = "<group>"; };
-		4C96B1911BEF393200F92EB8 /* CBSpinnerWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSpinnerWheel.h; sourceTree = "<group>"; };
-		4C96B1921BEF393200F92EB8 /* CBSpinnerWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSpinnerWheel.m; sourceTree = "<group>"; };
-		4CE94CC61BF02C38003EE0AE /* PiePiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PiePiece.h; path = ../PiePiece.h; sourceTree = "<group>"; };
-		4CE94CC71BF02C38003EE0AE /* PiePiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PiePiece.m; path = ../PiePiece.m; sourceTree = "<group>"; };
+		4C96B1421BEE6EC100F92EB8 /* ColorWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorWheelView.h; path = ColorWheel/ColorWheelView.h; sourceTree = "<group>"; };
+		4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorWheelView.m; path = ColorWheel/ColorWheelView.m; sourceTree = "<group>"; };
+		4C96B1911BEF393200F92EB8 /* CBSpinnerWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBSpinnerWheel.h; path = ColorWheel/CBSpinnerWheel.h; sourceTree = "<group>"; };
+		4C96B1921BEF393200F92EB8 /* CBSpinnerWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBSpinnerWheel.m; path = ColorWheel/CBSpinnerWheel.m; sourceTree = "<group>"; };
 		4CE94CCD1BF03B8C003EE0AE /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CE94CD01BF03B8C003EE0AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		4CE94CD21BF03B8C003EE0AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -196,10 +193,7 @@
 				4CE94CCA1BF02C49003EE0AE /* Controller */,
 				4CE94CC91BF02C41003EE0AE /* Model */,
 				4C96B1451BEE6ED100F92EB8 /* View */,
-				4C96B1181BEE6E9E00F92EB8 /* Main.storyboard */,
 				4C96B11B1BEE6E9E00F92EB8 /* Assets.xcassets */,
-				4C96B11D1BEE6E9E00F92EB8 /* LaunchScreen.storyboard */,
-				4C96B1201BEE6E9E00F92EB8 /* Info.plist */,
 				4C96B10F1BEE6E9E00F92EB8 /* Supporting Files */,
 			);
 			path = ColorWheel;
@@ -208,6 +202,7 @@
 		4C96B10F1BEE6E9E00F92EB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4C96B1201BEE6E9E00F92EB8 /* Info.plist */,
 				4CE94D851BF16224003EE0AE /* Constants.h */,
 				4CE94D861BF16224003EE0AE /* Constants.m */,
 				4C96B1121BEE6E9E00F92EB8 /* AppDelegate.h */,
@@ -244,6 +239,8 @@
 				4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */,
 				4C96B1911BEF393200F92EB8 /* CBSpinnerWheel.h */,
 				4C96B1921BEF393200F92EB8 /* CBSpinnerWheel.m */,
+				4C96B1181BEE6E9E00F92EB8 /* Main.storyboard */,
+				4C96B11D1BEE6E9E00F92EB8 /* LaunchScreen.storyboard */,
 			);
 			name = View;
 			path = ..;
@@ -252,8 +249,6 @@
 		4CE94CC91BF02C41003EE0AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4CE94CC61BF02C38003EE0AE /* PiePiece.h */,
-				4CE94CC71BF02C38003EE0AE /* PiePiece.m */,
 				4CE94D7A1BF13F04003EE0AE /* Colors.h */,
 				4CE94D7B1BF13F04003EE0AE /* Colors.m */,
 				4CE94D7E1BF142F2003EE0AE /* Colors.plist */,
@@ -493,7 +488,6 @@
 				4C96B1141BEE6E9E00F92EB8 /* AppDelegate.m in Sources */,
 				4C96B1441BEE6EC100F92EB8 /* ColorWheelView.m in Sources */,
 				4C96B1111BEE6E9E00F92EB8 /* main.m in Sources */,
-				4CE94CC81BF02C38003EE0AE /* PiePiece.m in Sources */,
 				4CE94D871BF16224003EE0AE /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +552,7 @@
 				4C96B1191BEE6E9E00F92EB8 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ColorWheel;
 			sourceTree = "<group>";
 		};
 		4C96B11D1BEE6E9E00F92EB8 /* LaunchScreen.storyboard */ = {
@@ -566,6 +561,7 @@
 				4C96B11E1BEE6E9E00F92EB8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ColorWheel;
 			sourceTree = "<group>";
 		};
 		4CE94CCF1BF03B8C003EE0AE /* Interface.storyboard */ = {
