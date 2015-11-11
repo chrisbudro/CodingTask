@@ -46,7 +46,10 @@
   CGFloat newAngle = atan2(yFromCenter, xFromCenter);
   CGFloat angleDifference = self.startAngle - newAngle;
   
+  NSLog(@"rotation: %f", self.currentRotationAngle);
+
   self.view.transform = CGAffineTransformRotate(self.view.transform, -angleDifference);
+  
 
   self.state = UIGestureRecognizerStateChanged;
 }
@@ -68,7 +71,10 @@
 - (void)reset {
   [super reset];
   self.startAngle = 0;
-//  self.startTransform = CGAffineTransformIdentity;
+}
+
+-(CGFloat)currentRotationAngle {
+  return atan2f(self.view.transform.b, self.view.transform.a);
 }
 
 @end
