@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class CBSpinnerWheel;
+@class ColorWheelView;
 
 @protocol CBSpinnerWheelDelegate <NSObject>
 
@@ -18,6 +19,8 @@
 @interface CBSpinnerWheel : UIView
 
 @property (weak, nonatomic) id <CBSpinnerWheelDelegate> delegate;
+
+@property (nonatomic) ColorWheelView *contentView;
 
 -(void)selectColorAtIndex:(NSInteger)index;
 

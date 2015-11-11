@@ -9,13 +9,15 @@
 #import "CBSpinnerWheel.h"
 #import "ColorWheelView.h"
 #import "Colors.h"
+#import "SpinGestureRecognizer.h"
 
 CGFloat const kSnapToPieAnimationDuration = 0.4;
 
 @interface CBSpinnerWheel ()
 
-@property (nonatomic) ColorWheelView *contentView;
-@property (strong, nonatomic) UIPanGestureRecognizer *spinGesture;
+
+@property (strong, nonatomic) SpinGestureRecognizer *spinGesture;
+//@property (strong, nonatomic) UIPanGestureRecognizer *spinGesture;
 
 @property (nonatomic) CGFloat startAngle;
 @property (nonatomic) CGAffineTransform startTransform;
@@ -65,34 +67,38 @@ CGFloat const kSnapToPieAnimationDuration = 0.4;
 }
 
 -(void)handleSpin:(UIPanGestureRecognizer *)spinGesture {
-  CGPoint touchPoint = [spinGesture locationInView:self];
 
-  CGFloat xFromCenter = touchPoint.x - self.contentView.bounds.size.width/2;
-  CGFloat yFromCenter = touchPoint.y - self.contentView.bounds.size.height/2;
-
-  switch (spinGesture.state) {
-    case UIGestureRecognizerStateBegan:
-      self.startAngle = atan2(yFromCenter, xFromCenter);
-      self.startTransform = self.contentView.transform;
-      break;
-    case UIGestureRecognizerStateChanged:
-    {
-      CGFloat newAngle = atan2(yFromCenter, xFromCenter);
-      CGFloat angleDifference = self.startAngle - newAngle;
-
-      self.contentView.transform = CGAffineTransformRotate(self.startTransform, -angleDifference);
-      break;
-    }
-    case UIGestureRecognizerStateEnded:
-    {
-      NSInteger newIndex = [self adjustedIndex];
-      [self selectColorAtIndex:newIndex];
-    }
-      break;
-    default:
-      break;
-  }
 }
+
+//-(void)handleSpin:(UIPanGestureRecognizer *)spinGesture {
+//  CGPoint touchPoint = [spinGesture locationInView:self];
+//  
+//  CGFloat xFromCenter = touchPoint.x - self.contentView.bounds.size.width/2;
+//  CGFloat yFromCenter = touchPoint.y - self.contentView.bounds.size.height/2;
+//  
+//  switch (spinGesture.state) {
+//    case UIGestureRecognizerStateBegan:
+//      self.startAngle = atan2(yFromCenter, xFromCenter);
+//      self.startTransform = self.contentView.transform;
+//      break;
+//    case UIGestureRecognizerStateChanged:
+//    {
+//      CGFloat newAngle = atan2(yFromCenter, xFromCenter);
+//      CGFloat angleDifference = self.startAngle - newAngle;
+//      
+//      self.contentView.transform = CGAffineTransformRotate(self.startTransform, -angleDifference);
+//      break;
+//    }
+//    case UIGestureRecognizerStateEnded:
+//    {
+//      NSInteger newIndex = [self adjustedIndex];
+//      [self selectColorAtIndex:newIndex];
+//    }
+//      break;
+//    default:
+//      break;
+//  }
+//}
 
 -(NSInteger)adjustedIndex {
   NSInteger calculatedIndex = 0;
@@ -139,9 +145,16 @@ CGFloat const kSnapToPieAnimationDuration = 0.4;
 
 #pragma mark - Getters/Setters
 
--(UIPanGestureRecognizer *)spinGesture {
+//-(UIPanGestureRecognizer *)spinGesture {
+//  if (!_spinGesture) {
+//    _spinGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSpin:)];
+//  }
+//  return _spinGesture;
+//}
+
+-(SpinGestureRecognizer *)spinGesture {
   if (!_spinGesture) {
-    _spinGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSpin:)];
+    _spinGesture = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(handleSpin:)];
   }
   return _spinGesture;
 }
