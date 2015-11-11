@@ -11,14 +11,13 @@
 #import "PiePiece.h"
 #import "Colors.h"
 
-CGFloat const kSnapToPieAnimationDuration = 0.2;
+CGFloat const kSnapToPieAnimationDuration = 0.4;
 
 @interface CBSpinnerWheel ()
 
 @property (nonatomic) CGFloat startAngle;
 @property (nonatomic) CGAffineTransform startTransform;
 @property (nonatomic) ColorWheelView *contentView;
-@property (nonatomic) NSMutableArray *piePieces;
 @property (readonly, nonatomic) CGFloat pieAngle;
 @property (strong, nonatomic) UIPanGestureRecognizer *spinGesture;
 @property (nonatomic) NSInteger currentIndex;
@@ -37,7 +36,6 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     [self offsetSelectedPiePieceToTopCenter];
     
     [self selectColorAtIndex:self.currentIndex];
-    [self registerPiePieces];
     
     self.backgroundColor = [UIColor clearColor];
   }
@@ -50,8 +48,6 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     [self setupContentView];
     [self addGestureRecognizer:self.spinGesture];
     [self offsetSelectedPiePieceToTopCenter];
-    
-    [self registerPiePieces];
     
     [self selectColorAtIndex:self.currentIndex];
   }
@@ -76,41 +72,39 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
 
 -(void)offsetSelectedPiePieceToTopCenter {
   CGFloat quarterRotationNegativeOffset = -M_PI/2;
-  CGFloat centerPiePieceOffset = self.pieAngle/2;
-  CGFloat offset = quarterRotationNegativeOffset - centerPiePieceOffset;
-  
-  CGAffineTransform topCenterOffset = CGAffineTransformRotate(self.transform, offset);
+
+  CGAffineTransform topCenterOffset = CGAffineTransformRotate(self.transform, quarterRotationNegativeOffset);
   self.transform = topCenterOffset;
 }
 
--(void)registerPiePieces {
-  NSArray *colors = [[Colors shared] colorList];
-  self.piePieces = [NSMutableArray arrayWithCapacity:colors.count];
-  
-  CGFloat centerValue = 0;
-  
-  for (int i = 0; i < colors.count; i++) {
-    PiePiece *pie = [[PiePiece alloc] init];
-    pie.centerValue = centerValue;
-    pie.minValue = centerValue - self.pieAngle/2;
-    pie.maxValue = centerValue + self.pieAngle/2;
-    pie.index = i;
-    
-    if (colors.count % 2 == 0 && pie.maxValue - self.pieAngle < -M_PI) {
-      centerValue = M_PI;
-      pie.centerValue = centerValue;
-      pie.minValue = fabs(pie.maxValue);
-    }
-    
-    centerValue -= self.pieAngle;
-    
-    if (colors.count % 2 != 0 && pie.minValue <= -M_PI) {
-      centerValue = -centerValue;
-      centerValue -= self.pieAngle;
-    }
-    [self.piePieces addObject:pie];
-  }
-}
+//-(void)registerPiePieces {
+//  NSArray *colors = [[Colors shared] colorList];
+//  self.piePieces = [NSMutableArray arrayWithCapacity:colors.count];
+//  
+//  CGFloat centerValue = 0;
+//  
+//  for (int i = 0; i < colors.count; i++) {
+//    PiePiece *pie = [[PiePiece alloc] init];
+//    pie.centerValue = centerValue;
+//    pie.minValue = centerValue - self.pieAngle/2;
+//    pie.maxValue = centerValue + self.pieAngle/2;
+//    pie.index = i;
+//    
+//    if (colors.count % 2 == 0 && pie.maxValue - self.pieAngle < -M_PI) {
+//      centerValue = M_PI;
+//      pie.centerValue = centerValue;
+//      pie.minValue = fabs(pie.maxValue);
+//    }
+//    
+//    centerValue -= self.pieAngle;
+//    
+//    if (colors.count % 2 != 0 && pie.minValue <= -M_PI) {
+//      centerValue = -centerValue;
+//      centerValue -= self.pieAngle;
+//    }
+//    [self.piePieces addObject:pie];
+//  }
+//}
 
 -(void)handleSpin:(UIPanGestureRecognizer *)spinGesture {
   CGPoint touchPoint = [spinGesture locationInView:self];
@@ -134,55 +128,59 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
     case UIGestureRecognizerStateEnded:
     {
       CGFloat currentAngle = atan2f(self.contentView.transform.b, self.contentView.transform.a);
-      CGFloat newValue = 0.0;
       
-      NSInteger updatedIndex = 0;
-      PiePiece *selectedPie;
+//      CGFloat newValue = 0.0;
+//      for (PiePiece *pie in self.piePieces) {
+//        if (pie.minValue > 0 && pie.maxValue < 0) {
+//          if (pie.maxValue > currentAngle || pie.minValue < currentAngle) {
+//            if (currentAngle > 0) {
+//              newValue = currentAngle - M_PI;
+//            } else {
+//              newValue = M_PI + currentAngle;
+//            }
+//            updatedIndex = pie.index;
+//            break;
+//          }
+//        } else if (currentAngle > pie.minValue && currentAngle < pie.maxValue) {
+//          newValue = currentAngle - pie.centerValue;
+//          updatedIndex = pie.index;
+//          break;
+//        }
+//      }
       
-      for (PiePiece *pie in self.piePieces) {
-        if (pie.minValue > 0 && pie.maxValue < 0) {
-          if (pie.maxValue > currentAngle || pie.minValue < currentAngle) {
-            if (currentAngle > 0) {
-              newValue = currentAngle - M_PI;
-            } else {
-              newValue = M_PI + currentAngle;
-            }
-            updatedIndex = pie.index;
-            selectedPie = pie;
-            break;
-          }
-        } else if (currentAngle > pie.minValue && currentAngle < pie.maxValue) {
-          newValue = currentAngle - pie.centerValue;
-          updatedIndex = pie.index;
-          selectedPie = pie;
-          break;
+      NSInteger adjustedIndex = 0;
+      if (currentAngle <= 0) {
+        adjustedIndex = fabs(round(currentAngle / self.pieAngle));
+        
+      } else {
+        CGFloat correctedAngle = 2*M_PI - currentAngle;
+        adjustedIndex = round(correctedAngle / self.pieAngle);
+        if (adjustedIndex >= [[Colors shared] colorList].count) {
+          adjustedIndex = 0;
         }
       }
       
-      CGFloat currentAngleInPositiveDegrees = [self degreesFromRadians:currentAngle] + 360.0;
-      if (currentAngleInPositiveDegrees >= 360) {
-        currentAngleInPositiveDegrees -= 360;
-      }
-      CGFloat pieAngleInDegrees = [self degreesFromRadians:self.pieAngle];
-      NSInteger calculatedIndex = round(currentAngleInPositiveDegrees / pieAngleInDegrees);
-      CGFloat newAngleInDegrees = (CGFloat)updatedIndex * pieAngleInDegrees;
-
-      CGFloat newAngleInRadians = [self radiansFromDegrees:newAngleInDegrees];
-      CGFloat angleDifference = newAngleInRadians - currentAngle;
+      [self selectColorAtIndex:adjustedIndex];
       
-      if (updatedIndex >= [[Colors shared] colorList].count) {
-        updatedIndex = 0;
-      }
-
-      if (self.currentIndex != updatedIndex) {
-        self.currentIndex = updatedIndex;
-        [self.delegate spinner:self didSelectColorAtIndex:self.currentIndex];
-      }
-      
-      CGAffineTransform rotateToCenterOfPie = CGAffineTransformRotate(self.contentView.transform, -newValue);
-      [UIView animateWithDuration:kSnapToPieAnimationDuration animations:^{
-        self.contentView.transform = rotateToCenterOfPie;
-      }];
+//      CGFloat adjustedAngle = adjustedIndex * self.pieAngle;
+//      if (adjustedAngle >= M_PI) {
+//        adjustedAngle = 2*M_PI - adjustedAngle;
+//      } else {
+//        adjustedAngle = -adjustedAngle;
+//      }
+//      
+//      CGFloat angleCorrection = currentAngle - adjustedAngle;
+//
+//      if (self.currentIndex != adjustedIndex) {
+//        self.currentIndex = adjustedIndex;
+//        [self.delegate spinner:self didSelectColorAtIndex:self.currentIndex];
+//      }
+//      
+//      CGAffineTransform rotateToCenterOfPie = CGAffineTransformRotate(self.contentView.transform, -angleCorrection);
+//
+//      [UIView animateWithDuration:kSnapToPieAnimationDuration delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        self.contentView.transform = rotateToCenterOfPie;
+//      } completion:nil];
     }
       break;
     default:
@@ -191,18 +189,43 @@ CGFloat const kSnapToPieAnimationDuration = 0.2;
 }
 
 -(void)selectColorAtIndex:(NSInteger)index {
-  
+#warning redundant
   CGFloat currentAngle = atan2f(self.contentView.transform.b, self.contentView.transform.a);
-  CGFloat newAngle = index * self.pieAngle;
-  CGFloat angleDifference = currentAngle + newAngle;
-
-  CGAffineTransform rotationToNewIndex = CGAffineTransformRotate(self.contentView.transform, -angleDifference);
-  [UIView animateWithDuration:kSnapToPieAnimationDuration animations:^{
-    self.contentView.transform = rotationToNewIndex;
-  }];
   
-  self.currentIndex = index;
+  CGFloat adjustedAngle = index * self.pieAngle;
+  if (adjustedAngle >= M_PI) {
+    adjustedAngle = 2*M_PI - adjustedAngle;
+  } else {
+    adjustedAngle = -adjustedAngle;
+  }
+  
+  CGFloat angleCorrection = currentAngle - adjustedAngle;
+  
+  if (self.currentIndex != index) {
+    self.currentIndex = index;
+    [self.delegate spinner:self didSelectColorAtIndex:self.currentIndex];
+  }
+  
+  CGAffineTransform rotateToCenterOfPie = CGAffineTransformRotate(self.contentView.transform, -angleCorrection);
+  
+  [UIView animateWithDuration:kSnapToPieAnimationDuration delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    self.contentView.transform = rotateToCenterOfPie;
+  } completion:nil];
 }
+
+//-(void)selectColorAtIndex:(NSInteger)index {
+//
+//  CGFloat currentAngle = atan2f(self.contentView.transform.b, self.contentView.transform.a);
+//  CGFloat newAngle = index * self.pieAngle;
+//  CGFloat angleDifference = currentAngle + newAngle;
+//
+//  CGAffineTransform rotationToNewIndex = CGAffineTransformRotate(self.contentView.transform, -angleDifference);
+//  [UIView animateWithDuration:kSnapToPieAnimationDuration animations:^{
+//    self.contentView.transform = rotationToNewIndex;
+//  }];
+//  
+//  self.currentIndex = index;
+//}
 
 //-(CGFloat)distanceFromCenter:(CGPoint)point {
 //  CGFloat x = point.x - self.bounds.size.width/2;
