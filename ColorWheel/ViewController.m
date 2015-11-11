@@ -7,15 +7,22 @@
 //
 
 #import "ViewController.h"
-#import "CBSpinnerWheel.h"
 #import <WatchConnectivity/WatchConnectivity.h>
+#import "ColorWheelView.h"
 #import "Constants.h"
 #import "Colors.h"
+#import "SpinGestureRecognizer.h"
+#import "ColorWheelDelegate.h"
 
-@interface ViewController () <CBSpinnerWheelDelegate, WCSessionDelegate>
+CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 
-@property (weak, nonatomic) IBOutlet CBSpinnerWheel *spinnerWheelView;
+@interface ViewController () <WCSessionDelegate>
+
+
+@property (weak, nonatomic) IBOutlet ColorWheelView *colorWheelView;
 @property (strong, nonatomic) WCSession *session;
+@property (strong, nonatomic) SpinGestureRecognizer *spinGesture;
+@property (strong, nonatomic) id <ColorWheelDelegate> colorWheelDelegate;
 
 @end
 
@@ -25,28 +32,60 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self setupColorWheel];
   [self setupWatchConnectivitySession];
-  if (self.session.reachable) {
-    [self sendColorIndexToWatch:[Colors shared].currentIndex];
-  }
   [self setupUI];
 }
 
 #pragma mark - Helper Methods
 
 -(void)setupWatchConnectivitySession {
-  self.spinnerWheelView.delegate = self;
   self.session = [WCSession defaultSession];
   self.session.delegate = self;
   [self.session activateSession];
+  
+  if (self.session.reachable) {
+    [self sendColorIndexToWatch:[Colors shared].currentIndex];
+  }
+}
+
+-(void)setupColorWheel {
+  self.spinGesture = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(handleSpin:)];
+  [self.colorWheelView addGestureRecognizer:self.spinGesture];
+  self.colorWheelDelegate = [[ColorWheelDelegate alloc] initWithColors:[[Colors shared] colorList]];
+  self.colorWheelView.delegate = self.colorWheelDelegate;
+}
+
+-(void)setupColorWheelConstraints {
+  NSLayoutConstraint *scaleConstraint;
+  if ([self isLandscapeOrientation]) {
+    scaleConstraint = [NSLayoutConstraint constraintWithItem:self.colorWheelView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:kColorWheelToSuperViewMultiplier constant:0];
+  } else {
+    scaleConstraint = [NSLayoutConstraint constraintWithItem:self.colorWheelView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:kColorWheelToSuperViewMultiplier constant:0];
+  }
+  
+  NSLayoutConstraint *ratio = [NSLayoutConstraint constraintWithItem:self.colorWheelView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.colorWheelView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0.0];
+  NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:self.colorWheelView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+  NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:self.colorWheelView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+  
+  scaleConstraint.active = true;
+  ratio.active = true;
+  centerX.active = true;
+  centerY.active = true;
+  }
+
+-(BOOL)isLandscapeOrientation {
+  CGSize size = [UIScreen mainScreen].bounds.size;
+  return size.width > size.height;
 }
 
 -(void)setupUI {
-  UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-  UIVisualEffectView *backgroundBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-  backgroundBlurView.frame = self.view.frame;
-  [self.view addSubview:backgroundBlurView];
-  [self.view sendSubviewToBack:backgroundBlurView];
+//  UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+//  UIVisualEffectView *backgroundBlurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//  backgroundBlurView.frame = self.view.frame;
+//  [self.view addSubview:backgroundBlurView];
+//  [self.view sendSubviewToBack:backgroundBlurView];
+  self.view.backgroundColor = [UIColor darkGrayColor];
 }
 
 -(void)sendColorIndexToWatch:(NSInteger)index {
@@ -55,10 +94,19 @@
   [self.session sendMessage:message replyHandler:nil errorHandler:nil];
 }
 
-#pragma mark - Spinner Wheel Delegate
+-(void)handleSpin:(SpinGestureRecognizer *)spinGesture {
+  
+  if (spinGesture.state == UIGestureRecognizerStateEnded) {
+    CGFloat currentAngle = [spinGesture currentRotationAngle];
+    NSInteger newIndex = [self.colorWheelView.delegate colorWheel:self.colorWheelView adjustedIndexForAngle:currentAngle];
+    [self setNewIndex:newIndex];
+  }
+}
 
--(void)spinner:(CBSpinnerWheel *)spinner didSelectColorAtIndex:(NSInteger)index {
+-(void)setNewIndex:(NSInteger)index {
+  [[Colors shared] updateCurrentIndex:index];
   [self sendColorIndexToWatch:index];
+  [self.colorWheelView.delegate colorWheel:self.colorWheelView spinToColorAtIndex:index];
 }
 
 #pragma mark - Watch Session Delegate
@@ -66,7 +114,7 @@
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
   NSNumber *updatedIndex = message[kUpdatedColorIndexKey];
   dispatch_async(dispatch_get_main_queue(), ^{
-    [self.spinnerWheelView selectColorAtIndex:updatedIndex.integerValue];
+    [self.colorWheelView.delegate colorWheel:self.colorWheelView spinToColorAtIndex:updatedIndex.integerValue];
   });
 }
 

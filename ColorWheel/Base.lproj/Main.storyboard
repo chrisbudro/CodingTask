@@ -19,10 +19,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CED-vh-uky" customClass="CBSpinnerWheel">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CED-vh-uky" customClass="ColorWheelView">
                                 <rect key="frame" x="60" y="60" width="480" height="480"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CED-vh-uky" secondAttribute="height" multiplier="1:1" id="LEP-ko-Y9u"/>
                                 </constraints>
@@ -31,13 +31,15 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CED-vh-uky" secondAttribute="bottom" constant="40" id="CN4-rM-Kpk"/>
                             <constraint firstItem="CED-vh-uky" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="M1d-FY-9gS"/>
-                            <constraint firstItem="CED-vh-uky" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="oH2-iR-NHa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CED-vh-uky" secondAttribute="trailing" constant="40" id="vJj-x2-vmH"/>
+                            <constraint firstItem="CED-vh-uky" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="oH2-iR-NHa"/>
+                            <constraint firstItem="CED-vh-uky" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="t02-ka-Jqt"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="CED-vh-uky" secondAttribute="trailing" constant="40" id="vJj-x2-vmH"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="spinnerWheelView" destination="CED-vh-uky" id="kvS-FC-BuY"/>
+                        <outlet property="colorWheelView" destination="CED-vh-uky" id="re9-mE-gjE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

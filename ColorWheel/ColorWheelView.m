@@ -8,6 +8,7 @@
 
 #import "ColorWheelView.h"
 #import "Colors.h"
+#import "SpinGestureRecognizer.h"
 
 @interface ColorWheelView ()
 
@@ -21,10 +22,27 @@
 
 @implementation ColorWheelView
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    self.colors = [[Colors shared] colorList];
+  }
+  return self;
+}
+
 -(instancetype)initWithColors:(NSArray *)colors {
   self = [super init];
   if (self) {
     self.colors = colors;
+  }
+  return self;
+}
+
+-(instancetype)initWithDelegate:(id <ColorWheelDelegate>)delegate {
+  self = [super init];
+  if (self) {
+    self.delegate = delegate;
+    self.colors = delegate.colors;
   }
   return self;
 }

@@ -7,7 +7,7 @@
 //
 
 #import <WatchKit/WatchKit.h>
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface InterfaceController : WKInterfaceController
 

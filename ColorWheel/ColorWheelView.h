@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CBSpinnerWheel.h"
+#import "ColorWheelDelegate.h"
 
 @interface ColorWheelView : UIView
 
+@property (weak, nonatomic) id <ColorWheelDelegate> delegate;
 -(instancetype)initWithColors:(NSArray *)colors;
 
 @end

@@ -8,7 +8,6 @@
 
 #import "InterfaceController.h"
 #import <WatchConnectivity/WatchConnectivity.h>
-#import <UIKit/UIKit.h>
 #import "Colors.h"
 #import "Constants.h"
 

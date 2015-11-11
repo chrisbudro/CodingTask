@@ -7,13 +7,10 @@
 //
 
 #import "SpinGestureRecognizer.h"
-#import "ColorWheelView.h"
-#import "CBSpinnerWheel.h"
 
 @interface SpinGestureRecognizer ()
 
 @property (nonatomic) CGFloat startAngle;
-//@property (nonatomic) CGAffineTransform startTransform;
 
 @end
 
@@ -27,10 +24,8 @@
   }
   
   CGPoint touchPoint = [touches.anyObject locationInView:self.view];
-  
   CGFloat xFromCenter = touchPoint.x - self.view.bounds.size.width/2;
   CGFloat yFromCenter = touchPoint.y - self.view.bounds.size.height/2;
-  
   self.startAngle = atan2(yFromCenter, xFromCenter);
 }
 
@@ -42,15 +37,10 @@
 
   CGFloat xFromCenter = touchPoint.x - self.view.bounds.size.width/2;
   CGFloat yFromCenter = touchPoint.y - self.view.bounds.size.height/2;
-  
   CGFloat newAngle = atan2(yFromCenter, xFromCenter);
   CGFloat angleDifference = self.startAngle - newAngle;
-  
-  NSLog(@"rotation: %f", self.currentRotationAngle);
-
   self.view.transform = CGAffineTransformRotate(self.view.transform, -angleDifference);
   
-
   self.state = UIGestureRecognizerStateChanged;
 }
 
@@ -64,7 +54,6 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
   [super touchesCancelled:touches withEvent:event];
   self.startAngle = 0;
-//  self.startTransform = CGAffineTransformIdentity;
   self.state = UIGestureRecognizerStateFailed;
 }
 
