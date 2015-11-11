@@ -37,7 +37,8 @@
   CGFloat pieAngle = 2*M_PI / (CGFloat)self.colors.count;
   
   for (int i = 0; i < self.colors.count; i++) {
-    CGFloat centerAngle = pieAngle * (CGFloat)i;
+    CGFloat zeroPointToTopCenterOffset = -M_PI/2;
+    CGFloat centerAngle = pieAngle * (CGFloat)i + zeroPointToTopCenterOffset;
     CGFloat startAngle = centerAngle - pieAngle/2;
     CGFloat endAngle = centerAngle + pieAngle/2;
     
