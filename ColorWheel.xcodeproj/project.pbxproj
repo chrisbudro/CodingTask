@@ -110,8 +110,8 @@
 		4C96B1361BEE6E9E00F92EB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C96B1421BEE6EC100F92EB8 /* ColorWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorWheelView.h; path = ColorWheel/ColorWheelView.h; sourceTree = "<group>"; };
 		4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorWheelView.m; path = ColorWheel/ColorWheelView.m; sourceTree = "<group>"; };
-		4CD50C2A1BF3237000C7A7FF /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
-		4CD50C2B1BF3237000C7A7FF /* SpinGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinGestureRecognizer.m; sourceTree = "<group>"; };
+		4CD50C2A1BF3237000C7A7FF /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpinGestureRecognizer.h; path = ColorWheel/SpinGestureRecognizer.h; sourceTree = "<group>"; };
+		4CD50C2B1BF3237000C7A7FF /* SpinGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpinGestureRecognizer.m; path = ColorWheel/SpinGestureRecognizer.m; sourceTree = "<group>"; };
 		4CD50C2D1BF3C4CF00C7A7FF /* ColorWheelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorWheelDelegate.h; sourceTree = "<group>"; };
 		4CD50C2E1BF3C4CF00C7A7FF /* ColorWheelDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorWheelDelegate.m; sourceTree = "<group>"; };
 		4CE94CCD1BF03B8C003EE0AE /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +238,8 @@
 		4C96B1451BEE6ED100F92EB8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CD50C2A1BF3237000C7A7FF /* SpinGestureRecognizer.h */,
+				4CD50C2B1BF3237000C7A7FF /* SpinGestureRecognizer.m */,
 				4C96B1421BEE6EC100F92EB8 /* ColorWheelView.h */,
 				4C96B1431BEE6EC100F92EB8 /* ColorWheelView.m */,
 				4C96B1181BEE6E9E00F92EB8 /* Main.storyboard */,
@@ -250,13 +252,9 @@
 		4CE94CC91BF02C41003EE0AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4CD50C2D1BF3C4CF00C7A7FF /* ColorWheelDelegate.h */,
-				4CD50C2E1BF3C4CF00C7A7FF /* ColorWheelDelegate.m */,
 				4CE94D7A1BF13F04003EE0AE /* Colors.h */,
 				4CE94D7B1BF13F04003EE0AE /* Colors.m */,
 				4CE94D7E1BF142F2003EE0AE /* Colors.plist */,
-				4CD50C2A1BF3237000C7A7FF /* SpinGestureRecognizer.h */,
-				4CD50C2B1BF3237000C7A7FF /* SpinGestureRecognizer.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -264,6 +262,8 @@
 		4CE94CCA1BF02C49003EE0AE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4CD50C2D1BF3C4CF00C7A7FF /* ColorWheelDelegate.h */,
+				4CD50C2E1BF3C4CF00C7A7FF /* ColorWheelDelegate.m */,
 				4C96B1151BEE6E9E00F92EB8 /* MainViewController.h */,
 				4C96B1161BEE6E9E00F92EB8 /* MainViewController.m */,
 			);
