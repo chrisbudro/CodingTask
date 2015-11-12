@@ -6,7 +6,7 @@
 //  Copyright © 2015 Chris Budro. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 #import <WatchConnectivity/WatchConnectivity.h>
 #import "ColorWheelView.h"
 #import "Constants.h"
@@ -16,7 +16,7 @@
 
 CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 
-@interface ViewController () <WCSessionDelegate>
+@interface MainViewController () <WCSessionDelegate>
 
 
 @property (strong, nonatomic) ColorWheelView *colorWheelView;
@@ -29,7 +29,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 #pragma mark - Life Cycle Methods
 
@@ -88,12 +88,6 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   }
 }
 
--(void)sendColorIndexToWatch:(NSInteger)index {
-  NSNumber *updatedIndex = [NSNumber numberWithInteger:index];
-  NSDictionary *message = @{kUpdatedColorIndexKey: updatedIndex};
-  [self.session sendMessage:message replyHandler:nil errorHandler:nil];
-}
-
 -(void)handleSpin:(SpinGestureRecognizer *)spinGesture {
   
   if (spinGesture.state == UIGestureRecognizerStateEnded) {
@@ -110,6 +104,12 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 }
 
 #pragma mark - Watch Session Delegate
+
+-(void)sendColorIndexToWatch:(NSInteger)index {
+  NSNumber *updatedIndex = [NSNumber numberWithInteger:index];
+  NSDictionary *message = @{kUpdatedColorIndexKey: updatedIndex};
+  [self.session sendMessage:message replyHandler:nil errorHandler:nil];
+}
 
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
   NSNumber *updatedIndex = message[kUpdatedColorIndexKey];
