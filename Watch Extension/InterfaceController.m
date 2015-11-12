@@ -15,7 +15,7 @@ CGFloat const kColorFadeDuration = 0.5;
 
 @interface InterfaceController() <WCSessionDelegate>
 
-@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceImage *colorImage;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceImage *interfaceImage;
 @property (strong, nonatomic) WCSession *session;
 @property (strong, nonatomic) UIImage *circleImage;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *colorCircleButton;
@@ -65,10 +65,19 @@ CGFloat const kColorFadeDuration = 0.5;
   
   UIImage *circleImage = UIGraphicsGetImageFromCurrentImageContext();
   self.circleImage = [circleImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  [self.colorImage setImage:self.circleImage];
+  [self.interfaceImage setImage:self.circleImage];
 
   UIGraphicsEndImageContext();
 }
+
+-(void)transitionToColorAtIndex:(NSInteger)index {
+  UIColor *color = [[Colors shared] colorAtIndex:index];
+  [self animateWithDuration:kColorFadeDuration animations:^{
+    [self.interfaceImage setTintColor:color];
+  }];
+}
+
+#pragma mark - Watch Connectivity Session Delegate
 
 -(void)setupWatchConnectivitySession {
   if ([WCSession isSupported]) {
@@ -77,15 +86,6 @@ CGFloat const kColorFadeDuration = 0.5;
     [self.session activateSession];
   }
 }
-
--(void)transitionToColorAtIndex:(NSInteger)index {
-  UIColor *color = [[Colors shared] colorAtIndex:index];
-  [self animateWithDuration:kColorFadeDuration animations:^{
-    [self.colorImage setTintColor:color];
-  }];
-}
-
-#pragma mark - Watch Connectivity Session Delegate
 
 -(void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
   NSNumber *updatedColorIndex = message[kUpdatedColorIndexKey];

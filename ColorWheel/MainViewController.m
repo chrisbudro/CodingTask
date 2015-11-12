@@ -39,17 +39,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   [self setupWatchConnectivitySession];
 }
 
-#pragma mark - Helper Methods
-
--(void)setupWatchConnectivitySession {
-  self.session = [WCSession defaultSession];
-  self.session.delegate = self;
-  [self.session activateSession];
-  
-  if (self.session.reachable) {
-    [self sendColorIndexToWatch:[Colors shared].currentIndex];
-  }
-}
+#pragma mark - Color Wheel Setup
 
 -(void)setupColorWheel {
   self.colorWheelDelegate = [[ColorWheelDelegate alloc] initWithColors:[[Colors shared] colorList]];
@@ -88,6 +78,8 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   }
 }
 
+#pragma mark - Spin Handler
+
 -(void)handleSpin:(SpinGestureRecognizer *)spinGesture {
   
   if (spinGesture.state == UIGestureRecognizerStateEnded) {
@@ -104,6 +96,16 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 }
 
 #pragma mark - Watch Session Delegate
+
+-(void)setupWatchConnectivitySession {
+  self.session = [WCSession defaultSession];
+  self.session.delegate = self;
+  [self.session activateSession];
+  
+  if (self.session.reachable) {
+    [self sendColorIndexToWatch:[Colors shared].currentIndex];
+  }
+}
 
 -(void)sendColorIndexToWatch:(NSInteger)index {
   NSNumber *updatedIndex = [NSNumber numberWithInteger:index];
@@ -124,7 +126,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   }
 }
 
-#pragma mark - Content Container Protocol
+#pragma mark - Orientation Handling
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
   [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
   [self setOrientationConstraintWithSize:size];

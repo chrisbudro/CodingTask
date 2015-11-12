@@ -16,6 +16,8 @@
 
 @implementation SpinGestureRecognizer
 
+#pragma mark - Gesture Methods
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   [super touchesBegan:touches withEvent:event];
   if (touches.count != 1) {
@@ -24,9 +26,7 @@
   }
   
   CGPoint touchPoint = [touches.anyObject locationInView:self.view];
-  CGFloat xFromCenter = touchPoint.x - self.view.bounds.size.width/2;
-  CGFloat yFromCenter = touchPoint.y - self.view.bounds.size.height/2;
-  self.startAngle = atan2(yFromCenter, xFromCenter);
+  self.startAngle = [self angleFromCenterToPoint:touchPoint];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -34,10 +34,7 @@
   if (self.state == UIGestureRecognizerStateFailed) return;
   
   CGPoint touchPoint = [touches.anyObject locationInView:self.view];
-
-  CGFloat xFromCenter = touchPoint.x - self.view.bounds.size.width/2;
-  CGFloat yFromCenter = touchPoint.y - self.view.bounds.size.height/2;
-  CGFloat newAngle = atan2(yFromCenter, xFromCenter);
+  CGFloat newAngle = [self angleFromCenterToPoint:touchPoint];
   CGFloat angleDifference = self.startAngle - newAngle;
   self.view.transform = CGAffineTransformRotate(self.view.transform, -angleDifference);
   
@@ -60,6 +57,15 @@
 - (void)reset {
   [super reset];
   self.startAngle = 0;
+}
+
+#pragma mark - Helper Methods
+
+-(CGFloat)angleFromCenterToPoint:(CGPoint)point {
+  CGPoint centerPoint = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2);
+  CGFloat xFromCenter = point.x - centerPoint.x;
+  CGFloat yFromCenter = point.y - centerPoint.y;
+  return atan2(yFromCenter, xFromCenter);
 }
 
 -(CGFloat)currentRotationAngle {

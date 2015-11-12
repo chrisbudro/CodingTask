@@ -20,6 +20,8 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
 
 @implementation Colors
 
+#pragma mark - Singleton
+
 +(instancetype)shared {
   static Colors *sharedColors;
   static dispatch_once_t onceToken;
@@ -28,6 +30,8 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
   });
   return sharedColors;
 }
+
+#pragma mark - Initializer
 
 -(instancetype)init {
   self = [super init];
@@ -39,6 +43,8 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
   }
   return self;
 }
+
+#pragma mark - Helper Methods
 
 -(UIColor *)colorAtIndex:(NSInteger)index {
   if (index < self.list.count) {
@@ -62,6 +68,8 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
   }
   return updatedIndex;
 }
+
+#pragma mark - Persistence
 
 -(NSArray *)retrieveColorArrayFromPropertyList {
   NSString *colorFilePath = [[NSBundle mainBundle] pathForResource:@"Colors" ofType:@"plist"];

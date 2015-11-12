@@ -6,6 +6,7 @@
 //  Copyright © 2015 Chris Budro. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 extern NSString * const kUpdatedColorIndexKey;
+extern CGFloat const kFullCircleInRadians;

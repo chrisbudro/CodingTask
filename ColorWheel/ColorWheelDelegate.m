@@ -10,6 +10,8 @@
 #import "ColorWheelView.h"
 
 CGFloat const kSnapToPieAnimationDuration = 0.4;
+CGFloat const kSnapToPieAnimationDamping = 0.6;
+CGFloat const kSnapToPieAnimationInitialVelocity = 0.4;
 
 @implementation ColorWheelDelegate
 
@@ -28,7 +30,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.4;
   if (angle <= 0) {
     calculatedIndex = fabs(round(angle / self.pieAngle));
   } else {
-    CGFloat correctedAngle = 2*M_PI - angle;
+    CGFloat correctedAngle = kFullCircleInRadians - angle;
     calculatedIndex = round(correctedAngle / self.pieAngle);
     if (calculatedIndex >= self.colors.count) {
       calculatedIndex = 0;
@@ -45,7 +47,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.4;
   
   CGAffineTransform rotateToCenterOfPie = CGAffineTransformRotate(colorWheel.transform, -angleCorrection);
   
-  [UIView animateWithDuration:kSnapToPieAnimationDuration delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+  [UIView animateWithDuration:kSnapToPieAnimationDuration delay:0 usingSpringWithDamping:kSnapToPieAnimationDamping initialSpringVelocity:kSnapToPieAnimationInitialVelocity options:UIViewAnimationOptionCurveEaseInOut animations:^{
     colorWheel.transform = rotateToCenterOfPie;
     
   } completion:nil];
@@ -54,7 +56,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.4;
 -(CGFloat)angleForIndex:(NSInteger)index {
   CGFloat adjustedAngle = index * self.pieAngle;
   if (adjustedAngle > M_PI) {
-    adjustedAngle = 2*M_PI - adjustedAngle;
+    adjustedAngle = kFullCircleInRadians - adjustedAngle;
   } else {
     adjustedAngle = -adjustedAngle;
   }
@@ -64,7 +66,7 @@ CGFloat const kSnapToPieAnimationDuration = 0.4;
 #pragma mark - Getters/Setters
 
 -(CGFloat)pieAngle {
-  return 2*M_PI / self.colors.count;
+  return kFullCircleInRadians / self.colors.count;
 }
 
 

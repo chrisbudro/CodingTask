@@ -23,7 +23,7 @@
                     </items>
                     <connections>
                         <outlet property="colorCircleButton" destination="llq-Gm-KKx" id="Qfv-fD-2LP"/>
-                        <outlet property="colorImage" destination="fYZ-qQ-rB3" id="A2x-Nu-7RC"/>
+                        <outlet property="interfaceImage" destination="fYZ-qQ-rB3" id="6R0-ee-ejc"/>
                     </connections>
                 </controller>
             </objects>

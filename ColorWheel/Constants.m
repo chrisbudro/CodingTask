@@ -9,3 +9,4 @@
 #import "Constants.h"
 
 NSString * const kUpdatedColorIndexKey = @"UpdatedColorIndex";
+CGFloat const kFullCircleInRadians = 2*M_PI;
