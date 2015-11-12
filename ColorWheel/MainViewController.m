@@ -10,7 +10,7 @@
 #import <WatchConnectivity/WatchConnectivity.h>
 #import "ColorWheelView.h"
 #import "Constants.h"
-#import "Colors.h"
+#import "ColorsManager.h"
 #import "SpinGestureRecognizer.h"
 #import "ColorWheelDelegate.h"
 
@@ -20,6 +20,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 
 
 @property (strong, nonatomic) ColorWheelView *colorWheelView;
+@property (strong, nonatomic) ColorsManager *colorsManager;
 @property (strong, nonatomic) WCSession *session;
 @property (strong, nonatomic) SpinGestureRecognizer *spinGesture;
 @property (strong, nonatomic) id <ColorWheelDelegate> colorWheelDelegate;
@@ -37,13 +38,21 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   [super viewDidLoad];
   [self setupColorWheel];
   [self setupWatchConnectivitySession];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self.colorsManager selector:@selector(saveCurrentColorIndex) name:UIApplicationWillResignActiveNotification object:nil];
+}
+
+-(void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self.colorsManager];
 }
 
 #pragma mark - Color Wheel Setup
 
 -(void)setupColorWheel {
-  self.colorWheelDelegate = [[ColorWheelDelegate alloc] initWithColors:[[Colors shared] colorList]];
+  self.colorsManager = [[ColorsManager alloc] init];
+  self.colorWheelDelegate = [[ColorWheelDelegate alloc] initWithColors:[self.colorsManager colorList]];
   self.colorWheelView = [[ColorWheelView alloc] initWithDelegate:self.colorWheelDelegate];
+  [self.colorWheelView.delegate colorWheel:self.colorWheelView spinToColorAtIndex:self.colorsManager.currentIndex];
   self.spinGesture = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(handleSpin:)];
   [self.colorWheelView addGestureRecognizer:self.spinGesture];
   
@@ -90,7 +99,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
 }
 
 -(void)setNewIndex:(NSInteger)index {
-  [[Colors shared] updateCurrentIndex:index];
+  [self.colorsManager updateCurrentIndex:index];
   [self sendColorIndexToWatch:index];
   [self.colorWheelView.delegate colorWheel:self.colorWheelView spinToColorAtIndex:index];
 }
@@ -103,7 +112,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   [self.session activateSession];
   
   if (self.session.reachable) {
-    [self sendColorIndexToWatch:[Colors shared].currentIndex];
+    [self sendColorIndexToWatch:self.colorsManager.currentIndex];
   }
 }
 
@@ -117,13 +126,13 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   NSNumber *updatedIndex = message[kUpdatedColorIndexKey];
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.colorWheelView.delegate colorWheel:self.colorWheelView spinToColorAtIndex:updatedIndex.integerValue];
-    [[Colors shared] updateCurrentIndex:updatedIndex.integerValue];
+    [self.colorsManager updateCurrentIndex:updatedIndex.integerValue];
   });
 }
 
 -(void)sessionReachabilityDidChange:(WCSession *)session {
   if (session.reachable) {
-    [self sendColorIndexToWatch:[Colors shared].currentIndex];
+    [self sendColorIndexToWatch:self.colorsManager.currentIndex];
   }
 }
 

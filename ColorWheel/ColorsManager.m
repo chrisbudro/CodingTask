@@ -6,30 +6,19 @@
 //  Copyright © 2015 Chris Budro. All rights reserved.
 //
 
-#import "Colors.h"
+#import "ColorsManager.h"
 #import "UIColor+HexColor.h"
 
 NSString *const kSavedColorIndexKey = @"SavedColorIndex";
 
-@interface Colors ()
+@interface ColorsManager ()
 
 @property (strong, nonatomic) NSArray *list;
 @property (nonatomic) NSInteger currentIndex;
 
 @end
 
-@implementation Colors
-
-#pragma mark - Singleton
-
-+(instancetype)shared {
-  static Colors *sharedColors;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    sharedColors = [[self alloc] init];
-  });
-  return sharedColors;
-}
+@implementation ColorsManager
 
 #pragma mark - Initializer
 

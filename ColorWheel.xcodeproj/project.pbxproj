@@ -25,8 +25,8 @@
 		4CE94CE31BF03B8D003EE0AE /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94CE21BF03B8D003EE0AE /* ExtensionDelegate.m */; };
 		4CE94CE51BF03B8D003EE0AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94CE41BF03B8D003EE0AE /* Assets.xcassets */; };
 		4CE94CE91BF03B8D003EE0AE /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4CE94CCD1BF03B8C003EE0AE /* Watch.app */; };
-		4CE94D7C1BF13F04003EE0AE /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D7B1BF13F04003EE0AE /* Colors.m */; settings = {ASSET_TAGS = (); }; };
-		4CE94D7D1BF13F04003EE0AE /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D7B1BF13F04003EE0AE /* Colors.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D7C1BF13F04003EE0AE /* ColorsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D7B1BF13F04003EE0AE /* ColorsManager.m */; settings = {ASSET_TAGS = (); }; };
+		4CE94D7D1BF13F04003EE0AE /* ColorsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D7B1BF13F04003EE0AE /* ColorsManager.m */; settings = {ASSET_TAGS = (); }; };
 		4CE94D7F1BF142F2003EE0AE /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94D7E1BF142F2003EE0AE /* Colors.plist */; settings = {ASSET_TAGS = (); }; };
 		4CE94D801BF142F2003EE0AE /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE94D7E1BF142F2003EE0AE /* Colors.plist */; settings = {ASSET_TAGS = (); }; };
 		4CE94D831BF145CE003EE0AE /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE94D821BF145CE003EE0AE /* UIColor+HexColor.m */; settings = {ASSET_TAGS = (); }; };
@@ -125,8 +125,8 @@
 		4CE94CE21BF03B8D003EE0AE /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
 		4CE94CE41BF03B8D003EE0AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4CE94CE61BF03B8D003EE0AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4CE94D7A1BF13F04003EE0AE /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
-		4CE94D7B1BF13F04003EE0AE /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
+		4CE94D7A1BF13F04003EE0AE /* ColorsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorsManager.h; sourceTree = "<group>"; };
+		4CE94D7B1BF13F04003EE0AE /* ColorsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorsManager.m; sourceTree = "<group>"; };
 		4CE94D7E1BF142F2003EE0AE /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 		4CE94D811BF145CE003EE0AE /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		4CE94D821BF145CE003EE0AE /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
@@ -252,8 +252,8 @@
 		4CE94CC91BF02C41003EE0AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4CE94D7A1BF13F04003EE0AE /* Colors.h */,
-				4CE94D7B1BF13F04003EE0AE /* Colors.m */,
+				4CE94D7A1BF13F04003EE0AE /* ColorsManager.h */,
+				4CE94D7B1BF13F04003EE0AE /* ColorsManager.m */,
 				4CE94D7E1BF142F2003EE0AE /* Colors.plist */,
 			);
 			name = Model;
@@ -488,7 +488,7 @@
 			files = (
 				4CE94D831BF145CE003EE0AE /* UIColor+HexColor.m in Sources */,
 				4C96B1171BEE6E9E00F92EB8 /* MainViewController.m in Sources */,
-				4CE94D7C1BF13F04003EE0AE /* Colors.m in Sources */,
+				4CE94D7C1BF13F04003EE0AE /* ColorsManager.m in Sources */,
 				4CD50C2C1BF3237000C7A7FF /* SpinGestureRecognizer.m in Sources */,
 				4C96B1141BEE6E9E00F92EB8 /* AppDelegate.m in Sources */,
 				4CD50C2F1BF3C4CF00C7A7FF /* ColorWheelDelegate.m in Sources */,
@@ -519,7 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CE94CE31BF03B8D003EE0AE /* ExtensionDelegate.m in Sources */,
-				4CE94D7D1BF13F04003EE0AE /* Colors.m in Sources */,
+				4CE94D7D1BF13F04003EE0AE /* ColorsManager.m in Sources */,
 				4CE94D891BF1635F003EE0AE /* UIColor+HexColor.m in Sources */,
 				4CE94CE01BF03B8D003EE0AE /* InterfaceController.m in Sources */,
 				4CE94D881BF16224003EE0AE /* Constants.m in Sources */,

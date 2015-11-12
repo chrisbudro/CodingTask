@@ -7,12 +7,9 @@
 //
 
 #import "ExtensionDelegate.h"
-#import "Colors.h"
+#import "ColorsManager.h"
 
 @implementation ExtensionDelegate
 
-- (void)applicationWillResignActive {
-  [[Colors shared] saveCurrentColorIndex];
-}
 
 @end

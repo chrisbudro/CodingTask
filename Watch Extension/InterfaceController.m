@@ -8,7 +8,7 @@
 
 #import "InterfaceController.h"
 #import <WatchConnectivity/WatchConnectivity.h>
-#import "Colors.h"
+#import "ColorsManager.h"
 #import "Constants.h"
 
 CGFloat const kColorFadeDuration = 0.5;
@@ -21,6 +21,8 @@ CGFloat const kColorFadeDuration = 0.5;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *colorCircleButton;
 @property (nonatomic) NSInteger currentIndex;
 
+
+@property (strong, nonatomic) ColorsManager *colorsManager;
 @end
 
 
@@ -31,6 +33,7 @@ CGFloat const kColorFadeDuration = 0.5;
 -(instancetype)init {
   self = [super init];
   if (self) {
+    self.colorsManager = [[ColorsManager alloc] init];
     [self setupWatchConnectivitySession];
   }
   return self;
@@ -41,10 +44,14 @@ CGFloat const kColorFadeDuration = 0.5;
   [self transitionToColorAtIndex:self.currentIndex];
 }
 
+-(void)didDeactivate {
+  [self.colorsManager saveCurrentColorIndex];
+}
+
 #pragma mark - Actions
 
 - (IBAction)circleWasPressed {
-  NSInteger nextIndex = [[Colors shared] nextIndex];
+  NSInteger nextIndex = [self.colorsManager nextIndex];
   self.currentIndex = nextIndex;
 
   NSDictionary *message = @{kUpdatedColorIndexKey: [NSNumber numberWithInteger:self.currentIndex]};
@@ -71,7 +78,7 @@ CGFloat const kColorFadeDuration = 0.5;
 }
 
 -(void)transitionToColorAtIndex:(NSInteger)index {
-  UIColor *color = [[Colors shared] colorAtIndex:index];
+  UIColor *color = [self.colorsManager colorAtIndex:index];
   [self animateWithDuration:kColorFadeDuration animations:^{
     [self.interfaceImage setTintColor:color];
   }];
@@ -95,12 +102,12 @@ CGFloat const kColorFadeDuration = 0.5;
 #pragma mark - Getters/Setters
 
 -(void)setCurrentIndex:(NSInteger)currentIndex {
-  [[Colors shared] updateCurrentIndex:currentIndex];
+  [self.colorsManager updateCurrentIndex:currentIndex];
   [self transitionToColorAtIndex:currentIndex];
 }
 
 -(NSInteger)currentIndex {
-  return [Colors shared].currentIndex;
+  return self.colorsManager.currentIndex;
 }
 
 @end

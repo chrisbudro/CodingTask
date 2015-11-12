@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Colors : NSObject
+@interface ColorsManager : NSObject
 
 @property (readonly, nonatomic) NSInteger currentIndex;
-
-+(instancetype)shared;
 
 -(UIColor *)colorAtIndex:(NSInteger)index;
 -(NSArray *)colorList;

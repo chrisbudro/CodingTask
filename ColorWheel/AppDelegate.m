@@ -7,16 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "Colors.h"
+#import "ColorsManager.h"
 
 @implementation AppDelegate
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-  [[Colors shared] saveCurrentColorIndex];
-}
-
--(void)applicationWillTerminate:(UIApplication *)application {
-  [[Colors shared] saveCurrentColorIndex];
-}
 
 @end
