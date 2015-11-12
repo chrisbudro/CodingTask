@@ -48,6 +48,7 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
 
 -(void)updateCurrentIndex:(NSInteger)index {
   self.currentIndex = index;
+  [self archiveCurrentColorIndex];
 }
 
 -(NSInteger)nextIndex {
@@ -74,11 +75,14 @@ NSString *const kSavedColorIndexKey = @"SavedColorIndex";
   return convertedColorArray;
 }
 
--(void)saveCurrentColorIndex {
+-(void)archiveCurrentColorIndex {
   NSNumber *indexObject = [NSNumber numberWithInteger:self.currentIndex];
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
   [userDefaults setObject:indexObject forKey:kSavedColorIndexKey];
-  [userDefaults synchronize];
+}
+
+-(void)save {
+  [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(NSInteger)retrieveSavedColorIndex {

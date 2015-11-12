@@ -16,6 +16,6 @@
 -(NSArray *)colorList;
 -(void)updateCurrentIndex:(NSInteger)index;
 -(NSInteger)nextIndex;
--(void)saveCurrentColorIndex;
+-(void)save;
 
 @end

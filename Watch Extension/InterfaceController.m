@@ -45,7 +45,7 @@ CGFloat const kColorFadeDuration = 0.5;
 }
 
 -(void)didDeactivate {
-  [self.colorsManager saveCurrentColorIndex];
+  [self.colorsManager save];
 }
 
 #pragma mark - Actions

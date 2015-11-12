@@ -39,7 +39,7 @@ CGFloat const kColorWheelToSuperViewMultiplier = 0.80;
   [self setupColorWheel];
   [self setupWatchConnectivitySession];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self.colorsManager selector:@selector(saveCurrentColorIndex) name:UIApplicationWillResignActiveNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self.colorsManager selector:@selector(save) name:UIApplicationWillResignActiveNotification object:nil];
 }
 
 -(void)dealloc {
