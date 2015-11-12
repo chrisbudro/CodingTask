@@ -41,6 +41,7 @@
 -(instancetype)initWithDelegate:(id <ColorWheelDelegate>)delegate {
   self = [super init];
   if (self) {
+    self.backgroundColor = [UIColor clearColor];
     self.delegate = delegate;
     self.colors = delegate.colors;
   }

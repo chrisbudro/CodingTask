@@ -14,4 +14,6 @@
 @property (weak, nonatomic) id <ColorWheelDelegate> delegate;
 -(instancetype)initWithColors:(NSArray *)colors;
 
+-(instancetype)initWithDelegate:(id <ColorWheelDelegate>)delegate;
+
 @end
